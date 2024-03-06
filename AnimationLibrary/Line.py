@@ -46,29 +46,31 @@ class Line():
         self.color = color
         self.position = position #TODO: i think postion "could" be updated with initial value of A, as it's being
 
-        # TODO: remember that user might use A and B in a way, where A is in bottom right
-        # and B is top left (default should be A top left, B bottom right), handle this case smooothly
-
-        r_A_x = min(A.x, B.x)
-        r_A_y = min(A.y, B.y)
-        r_B_x = max(A.x, B.x)
-        r_B_y = max(A.y, B.y)
-
-        #translate A to 0, as is with other shapes
-        r_B_x = r_B_x - r_A_x
-        r_B_y = r_B_y - r_A_y
-
-        self.rect = Rect(Point(0, 0), Point(r_B_x, r_B_y))
+        # # TODO: remember that user might use A and B in a way, where A is in bottom right
+        # # and B is top left (default should be A top left, B bottom right), handle this case smooothly
+        #
+        # r_A_x = min(A.x, B.x)
+        # r_A_y = min(A.y, B.y)
+        # r_B_x = max(A.x, B.x)
+        # r_B_y = max(A.y, B.y)
+        #
+        # #translate A to 0, as is with other shapes
+        # r_B_x = r_B_x - r_A_x
+        # r_B_y = r_B_y - r_A_y
+        #
+        # self.rect = Rect(Point(0, 0), Point(r_B_x, r_B_y))
+        #
+        # self.rect = Rect(A, B)
 
         #TODO: something is wrong here, decide on how should this table be initiated correctly, debug, check and continue
         self.pixels = [[0] * (self.rect.B.x + 1) for i in range(self.rect.B.y + 1)]
 
-        m = r_B_y / r_B_x
+        #m = r_B_y / r_B_x
 
         points = self.rasterize()
 
         for p in points:
-            self.pixels[p.y][p.x] = Pixel(p.x, p.y, self.color)
+            self.pixels[p.y][p.x] = Pixel(p.x + position.x, p.y + position.y, self.color)
 
         # for x in range(self.rect.B.x + 1):
         #     for y in range(self.rect.B.y + 1):
@@ -92,14 +94,17 @@ class Line():
         dx = B.x - A.x
         dy = B.y - A.y
 
+        octant = 0
+
         if dx >= 0:
             if dy >= 0:
                 if abs(dx) >= abs(dy):
                     # 1st octant
-                    # TODO: do nothing
+                    octant = 1
                     pass
                 else:
                     # 2nd octant
+                    octant = 2
                     A = swapXWithY(A)
                     B = swapXWithY(B)
 
@@ -113,7 +118,12 @@ class Line():
                 if abs(dx) >= abs(dy):
                     return 4
                 else:
-                    return 3
+                    # 3rd octant
+                    octant = 3
+                    A = Point(A.x, -A.y) # TODO: when line is in this quadrant, either rasterization will break
+                    B = Point(B.x, -B.y) # TODO: (bcs it's out of (0, +)(0, +) rect), or bresnham will break (not detect 3rd quadrant)
+                                         # TODO: something must get changed, for now i'd shoot for changing rasterization, so that it manages
+                                         # TODO: such a line, and leave lines 49, 63 commented out as it is now
             else:
                 if abs(dx) >= abs(dy):
                     return 5
@@ -128,10 +138,18 @@ class Line():
         points = bresenham(A, B)
         #część 3 - przetransformowanie tego arraya pixeli, tą samą tranformacją, co wczesniej została przetransformowana linia
 
+        match octant:
+            case 1:
+                # do nothing
+                pass
+            case 2:
 
+                reversed_points = []
+                for p in points:
+                    reversed_points.append(Point(p.y, p.x))
+                points = reversed_points
 
-        # TODO : now do this, bcs line 71 is crashing
-
+        return points
 
     def __iter__(self):
         self.i = 0
