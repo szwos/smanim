@@ -1,0 +1,5 @@
+https://ciechanow.ski/alpha-compositing/ (to nie jest biblografia, bo to jest blog post, ale moze sie przydac jeszzcze)
+https://www.ncl.ac.uk/webtemplate/ask-assets/external/maths-resources/core-mathematics/geometry/equation-of-a-straight-line.html (zwykłe równanie linii, ale jest dobry artykuł więc dodaje tak o)
+https://www.pygame.org/docs/
+https://matplotlib.org/stable/index.html
+https://docs.manim.community/en/stable/index.html

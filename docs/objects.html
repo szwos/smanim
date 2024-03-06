@@ -1,0 +1,305 @@
+<h1 id="obiekty-wizualne">Obiekty wizualne</h1>
+<h2 id="circle">Circle</h2>
+<h3 id="konstruktor">Konstruktor</h3>
+<pre><code>Circle(<span class="hljs-string">r:</span> <span class="hljs-keyword">float</span>, <span class="hljs-string">position:</span> Point = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), <span class="hljs-string">color:</span> Color = Color(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>))
+</code></pre><ul>
+<li>Parametry<ul>
+<li><code>r : float</code> <br>
+Promień okręgu</li>
+<li><code>position : Point</code> <em>opcjonalny</em> <br>
+Pozycja początkowa koła. Określa położenie punktu znajdującego się w lewym górnym rogu prostokąta opisującego okrąg.
+Domyślnie przyjmuje wartość <code>Point(0, 0)</code> - jest to pozycja w lewym górnym rogu ekranu.</li>
+<li><code>color : Color</code> <em>opcjonalny</em><br>
+Kolor, jaki zostanie wykorzystany do rysowania koła, Domyślna wartość to <code>Color(0, 0, 0, 255)</code>, jest to w pełni nieprzezroczysty kolor czarny. </li>
+</ul>
+</li>
+</ul>
+<h3 id="zmienne-instancji">Zmienne instancji</h3>
+<ul>
+<li><code>center: Point(x: int, y: int)</code> <br>
+Obliczana w konstruktorze, określa punkt (w odniesieniu do prostokąta określającego okrąg), w którym znajduje się środek okręgu.</li>
+</ul>
+<h2 id="line">Line</h2>
+<p>Klasa Line definiuję prostą, przebiegającą przez podane w konstruktorze punkty.</p>
+<h3 id="konstruktor">Konstruktor</h3>
+<pre><code><span class="hljs-selector-tag">Line</span>(<span class="hljs-attribute">A</span>: Point, <span class="hljs-attribute">B</span>: Point, <span class="hljs-attribute">position</span>: Point = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), <span class="hljs-attribute">color</span>: Color = Color(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, ,<span class="hljs-number">255</span>))
+</code></pre><ul>
+<li>Parametry<ul>
+<li><code>A : Point</code> <br>
+Punkt A, przez który przebiega prosta.</li>
+<li><code>B : Point</code> <br>
+Punkt B, przez który przebiega prosta.</li>
+<li><code>position</code>  <br> 
+Pozycja początkowa prostej. Określa przesunięcie prostej od pozycji początkowej
+Domyślnie przyjmuje wartość <code>Point(0, 0)</code> - jest to brak przesunięcia.</li>
+<li><code>color : Color</code> <em>opcjonalny</em> <br>
+Kolor, jaki zostanie wykorzystany do rysowania prostej, Domyślna wartość to <code>Color(0, 0, 0, 255)</code>, jest to w pełni nieprzezroczysty kolor czarny.</li>
+</ul>
+</li>
+</ul>
+<h2 id="line_segment">Line_Segment</h2>
+<p>Klasa Line_segment definiuje odcinek zaczynający się od punktu A, a kończący się na punkcie B.</p>
+<h3 id="konstruktor">Konstruktor</h3>
+<pre><code><span class="hljs-selector-tag">Line_Segment</span>(<span class="hljs-attribute">A</span>: Point, <span class="hljs-attribute">B</span>: Point, <span class="hljs-attribute">position</span>: Point = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), <span class="hljs-attribute">color</span>: Color = Color(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>)):
+</code></pre><ul>
+<li>Parametry<ul>
+<li><code>A : Point</code> <br>
+Punkt A - początkowy punkt odcinka</li>
+<li><code>B : Point</code> <br>
+Punkt B - końcowyn punkt odcinka</li>
+<li><code>position</code> Pozycja początkowa odcinka. Określa przesunięcie odcinka od pozycji        początkowej. Domyślnie przyjmuje wartość Point(0, 0) - jest to brak przesunięcia.</li>
+<li><code>color : Color</code> <em>opcjonalny</em> <br>
+Kolor, jaki zostanie wykorzystany do rysowania odcinka, Domyślna wartość to <code>Color(0, 0, 0, 255)</code>, jest to w pełni nieprzezroczysty kolor czarny.</li>
+</ul>
+</li>
+</ul>
+<h2 id="spline">Spline</h2>
+<p>Klasa Spline definiuje krzywą będącą funkcją wielomianu. Przebiega ona przez wszystkie podane w parametrze punkty.</p>
+<h3 id="konstruktor">Konstruktor</h3>
+<pre><code>Spline(<span class="hljs-string">points:</span> List[Point], <span class="hljs-string">tension:</span> <span class="hljs-keyword">float</span> = <span class="hljs-number">0.5</span>, <span class="hljs-string">num_segments:</span> <span class="hljs-keyword">int</span> = <span class="hljs-number">100</span>, <span class="hljs-string">position:</span> Point = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), <span class="hljs-string">color:</span> Color = Color(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>))
+</code></pre><ul>
+<li>Parametry<ul>
+<li><code>points : List[Point]</code> <br>
+Lista punktów, przez które będzie przebiegać krzywa</li>
+<li><code>tension : float</code> <em>opcjonalny</em> <br>
+parametr, określający stałą napięcia krzywej. Domyślna wartość, to <code>0.5</code></li>
+<li><code>num_segments : int</code> <em>opcjonalny</em> <br>
+parametr, określający na ile segmentów zostanie podzielona krzywa. Domyślna wartość, to <code>100</code></li>
+<li><code>position</code> <em>opcjonalny</em> <br>
+Pozycja początkowa krzywej. Określa przesunięcie odcinka od pozycji początkowej. Domyślnie przyjmuje wartość Point(0, 0) - jest to brak przesunięcia.</li>
+<li><code>color : Color</code> <em>opcjonalny</em> <br>
+Kolor, jaki zostanie wykorzystany do rysowania krzywej, Domyślna wartość to <code>Color(0, 0, 0, 255)</code>, jest to w pełni nieprzezroczysty kolor czarny.</li>
+</ul>
+</li>
+</ul>
+<h2 id="rect">Rect</h2>
+<p>Klasa Rect definiuje prostokąt, którego lewy górny róg znajduje się w punkcie A, natomiast prawy dolny róg znajduje się w punkcie B. Ściany prostokąta domyślnie są ortogonalne do osi układu współrzędnych.</p>
+<h3 id="kontruktor">Kontruktor</h3>
+<pre><code><span class="hljs-selector-tag">Rect</span>(<span class="hljs-attribute">A</span>: Point, <span class="hljs-attribute">B</span>: Point, <span class="hljs-attribute">color</span>: Color = Color(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>))
+</code></pre><ul>
+<li>Parametry<ul>
+<li><code>A: Point</code> <br>
+Punkt A - punkt określający lewy górny róg prostokąta</li>
+<li><code>B: Point</code> <br>
+Punkt B - punkt określający prawy dolny róg prostokąta</li>
+<li><code>position : Point</code> <em>opcjonalny</em> <br>
+Pozycja początkowa prostokątu. Określa położenie punktu znajdującego się w lewym górnym rogu prstokątu.
+Domyślnie przyjmuje wartość <code>Point(0, 0)</code> - jest to pozycja w lewym górnym rogu ekranu.</li>
+<li><code>color : Color</code> <em>opcjonalny</em> <br>
+Kolor, jaki zostanie wykorzystany do rysowania prostokąta, Domyślna wartość to <code>Color(0, 0, 0, 255)</code>, jest to w pełni nieprzezroczysty kolor czarny.</li>
+</ul>
+</li>
+</ul>
+<h2 id="triangle">Triangle</h2>
+<p>TODO</p>
+<p>Klasa Triangle definiuje trójkąt, Trójkąt może zostać z powodzeniem utworzony za pomocą klasy Polygon, dla tego klasa Trójkąt skupia się na szczególnych przypadkach trójkąta, takich, jak trójkąt równoramienny, trójkąt prostokątny etc.</p>
+<h2 id="polygon">Polygon</h2>
+<p>Klasa Polygon definiuje wszystkie możliwe wielokąty składające się z n punktów. jego wierzchołki znajdują się w podanych w argumencie punktach. ostatni punkt jest łaczony linią z punkem pierwszym</p>
+<h3 id="konstruktor">Konstruktor</h3>
+<pre><code><span class="hljs-keyword">Polygon</span>(vertices: <span class="hljs-keyword">List</span>[<span class="hljs-keyword">Point</span>], position: <span class="hljs-keyword">Point</span> = <span class="hljs-keyword">Point</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), color: Color = Color(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>))
+</code></pre><ul>
+<li>Parametry<ul>
+<li><code>vertices : List[Point]</code> <br>
+Lista punktów, które określają wierzchołki wielokątu</li>
+<li><code>position : Point</code> <em>opcjonalny</em> <br>
+Pozycja początkowa wielokątu. Określa położenie punktu znajdującego się w lewym górnym rogu prostokątu opisującego wielokąt.
+Domyślnie przyjmuje wartość <code>Point(0, 0)</code> - jest to pozycja w lewym górnym rogu ekranu.</li>
+<li><code>color : Color</code> <em>opcjonalny</em><br>
+Kolor, jaki zostanie wykorzystany do rysowania wielokątu, Domyślna wartość to <code>Color(0, 0, 0, 255)</code>, jest to w pełni nieprzezroczysty kolor czarny. </li>
+</ul>
+</li>
+</ul>
+<h1 id="obiekty-strukturalne">Obiekty strukturalne</h1>
+<h2 id="grid">Grid</h2>
+<p>Klasa grid definiuje strukturę siatki, pozwala ona na rozmieszczanie obiektów w poszczególnych kolumnach oraz rzędach.</p>
+<h3 id="konstruktor">Konstruktor</h3>
+<pre><code>Grid(<span class="hljs-string">row_count:</span> <span class="hljs-keyword">int</span>, <span class="hljs-string">column_count:</span> <span class="hljs-keyword">int</span>, <span class="hljs-string">dimensions:</span> Rect, <span class="hljs-string">position:</span> Point = Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>))
+</code></pre><ul>
+<li>Parametry<ul>
+<li><code>row_count: int</code> <br>
+ilość rzędów siatki</li>
+<li><code>column_count: int</code> <br>
+ilość kolumn siatki</li>
+<li><code>dimensions: Rect</code> <br>
+Prostokąt, w którym zawierała będzie się siatka, wymiary komórek skalują się w zależności od tego prostokąta</li>
+<li><code>position : Point</code> <em>opcjonalny</em> <br>
+Pozycja początkowa siatki. Określa położenie punktu znajdującego się w lewym górnym rogu prstokątu w którym zawiera się siatka.
+Domyślnie przyjmuje wartość <code>Point(0, 0)</code> - jest to pozycja w lewym górnym rogu ekranu.<h3 id="metody">Metody</h3>
+add(obj, row: int = None, column: int = None)
+Metoda add dodaje umieszcza wskazany objekt <code>obj</code> na pozycji wskazanej przez parametry <code>row</code> i <code>column</code>. Jeżeli dana pozycja jest już zajęta, to w zależności od parametru <code>replace</code> obiekt wczesniej tam znajdujący zostanie usunięty (<code>relpace = true</code>), lub dodawanie elementu się nie powiedzie i zostanie podniesiony wyjątek.</li>
+</ul>
+</li>
+<li>Parametry<ul>
+<li><code>obj</code> <br>
+Objekt, który ma zostać dodany</li>
+<li><code>row: int</code> <em>opcjonalny</em> <br>
+Określa rząd, w którym ma zostać dodany przekazany obiekt. Jeżeli nie została podana żadna wartość, to obiekt zostanie dodany na pierwszej wolnej pozycji w podanej kolumnie.</li>
+<li><code>column: int</code> <em>opcjonalny</em> <br>
+Określa kolumnę, w której ma zostać dodany przekazany obiekt. Jeżeli nie została podana żadna wartość, to obiekt zostanie dodany na pierwszej wolnej pozycji w podanym rzędzie.</li>
+<li><code>replace: bool = true</code> <em>opcjonalny</em> <br>
+Jeżeli ten argument ma wartość <code>true</code>, to w sytuacji, gdy dana wskazana pozycja jest już zajęta, poprzednio znajdujący się na niej obiekt zostanie usunięty. Jeżeli ma wartość <code>false</code>, to wskazany obiekt nie zostanie dodany i podniesiony zostanie wyjątek.
+###
+remove(row: int = None, column: int = None)
+Metoda remove usuwa obiekt na wskazanej za pomocą parametrów <code>row</code> i <code>column</code> pozycji.
+Jeżeli żaden z tych argumentów nie zostanie podany, to usunięte zostaną wszystkie obiekty w siatce.</li>
+</ul>
+</li>
+<li>Parametry<ul>
+<li><code>row: int</code> <em>opcjonalny</em> <br>
+Określa rząd, w którym zostanie usunięty obiekt. Jeżeli nie została podana żadna wartość, to usunięte zostaną wszystkie obiekty w podanej kolumnie.</li>
+<li><code>column: int</code> <em>opcjonalny</em> <br>
+Określa kolumnę, w której zostanie usunięty obiekt. Jeżeli nie została podana żadna wartość, to usunięte zostaną wszystkie obiekty w podanym rzędzie.</li>
+</ul>
+</li>
+</ul>
+<h2 id="s_circle">S_Circle</h2>
+<p>TODO </p>
+<h2 id="s_line">S_Line</h2>
+<p>TODO</p>
+<h1 id="obiekty-pomocnicze">Obiekty pomocnicze</h1>
+<h2 id="animation">Animation</h2>
+<p>Klasa animacja słuzy jako kontener dla obiektów, które będą brały w niej udział. Prztrzymuje również informacje na temat samej animacji.</p>
+<h3 id="konstruktor">Konstruktor</h3>
+<pre><code><span class="hljs-function"><span class="hljs-title">Animation</span><span class="hljs-params">(frameCount, canvas, bgColor)</span></span>
+</code></pre><ul>
+<li>Parametry <ul>
+<li><code>frameCount: int</code> <br>
+Określa ilość klatek, z których będzie się składać animacja.</li>
+<li><code>canvas: Canvas</code> <br>
+Poprzez parametr canvas określane są wymiary tworzonej animacji.</li>
+<li><code>bgColor : Color</code> <br>
+Kolor, jaki będzie stanowił tło całej animacji.</li>
+</ul>
+</li>
+</ul>
+<h3 id="metody">Metody</h3>
+<pre><code><span class="hljs-function"><span class="hljs-title">add</span><span class="hljs-params">(obj, path=None)</span></span>
+</code></pre><p>Metoda add dodaje do animacji obiekt, wraz z obiektem można dodać ścieżkę <code>Path</code> jaka będzie dotyczyła danego obiektu.</p>
+<ul>
+<li>Parametry<ul>
+<li><code>obj</code> <br>
+Za pomocą parametru obj przekazuje się obiekt, który zostanie dodany do animacji</li>
+<li><code>path: None</code> <em>opcjonalny</em> <br>
+Za pomocą parametru path przekazywana jest ścieżka <code>Path</code>, która będzie określała ruch przekazanego obiektu w czasie, Jeżeli ścieżka nie zostanie określona, to obiekt pozostanie w takiej pozycji, jak jego pozycja początkowa.</li>
+</ul>
+</li>
+</ul>
+<p>### 
+  getFrames()
+Metoda pomocnicza, zwraca tablicę wszystkich klatek <code>Frame</code> jakie generuje dana animacja.</p>
+<h2 id="path">Path</h2>
+<p>Reprezentuje ścieżkę, po której będzie się przemieszczał aniowany obiekt.</p>
+<h3 id="konstruktor">Konstruktor</h3>
+<pre><code><span class="hljs-function"><span class="hljs-title">Path</span><span class="hljs-params">(timePeriod)</span></span>
+</code></pre><ul>
+<li>Parametry<ul>
+<li><code>timePeriod</code> <br>
+Całkowita ilość klatek <code>Frame</code>, na które podzielona zostanie ścieżka (długość życia obiektu)</li>
+</ul>
+</li>
+</ul>
+<h3 id="metody">Metody</h3>
+<pre><code><span class="hljs-function"><span class="hljs-title">add</span><span class="hljs-params">(point: Point)</span></span>
+</code></pre><p>Metoda add dodaje do ścieżki kolejny punkt <code>Point</code> - poszczególne pozycje w danej ścieżce będą określane pomiędzy tymi punktami.</p>
+<ul>
+<li>Parametry<ul>
+<li><code>point: Point</code> <br>
+Parametr point określa punkt, który będzie brał udział w interpolacji.</li>
+</ul>
+</li>
+</ul>
+<p>###
+  asTimeFunction(t: int)
+Ponieważ biblioteka obsługuje ruch obiektów za pomocą funckji czasu, ta funkcja pozwala na ścieżce <code>Path</code> działać, jako taka właśnie funkcja czasu, zwraca ona pozycję w podanym w parametrze <code>t</code> czasie.</p>
+<ul>
+<li>Parametry<ul>
+<li><code>t: int</code> <br>
+Za pomocą parametru <code>t</code> przekazywany jest moment w czasie, w jakim ma zostać obliczonna pozycja. </li>
+</ul>
+</li>
+</ul>
+<h2 id="canvas">Canvas</h2>
+<h3 id="konstruktor">Konstruktor</h3>
+<p>  Canvas(width: int, height: int)</p>
+<ul>
+<li>Parametry<ul>
+<li><code>width: int</code> <br>
+Określa szerokość obszaru, w jakim prezentowana będzie animacja</li>
+<li><code>height: int</code> <br>
+Określa wysokość obszaru, w jakim prezentowana będzie animacja</li>
+</ul>
+</li>
+</ul>
+<h2 id="color">Color</h2>
+<p>TODO</p>
+<h2 id="pixel">Pixel</h2>
+<p>Pixel, to obiekt, który określa pozycję oraz kolor znajdujący się na tej pozycji.</p>
+<h3 id="konstruktor">Konstruktor</h3>
+<ul>
+<li>Parametry<ul>
+<li><code>x: int</code> <br>
+Pozycja horyzontalna (na osi x)</li>
+<li><code>y: int</code> <br>
+Pozycja wertykalna (na osi y)</li>
+<li><code>color: Color</code> <br>
+kolor znajdujący się na danej pozycji</li>
+</ul>
+</li>
+</ul>
+<h2 id="frame">Frame</h2>
+<p>Klasa frame prezentuje daną klatkę animacji</p>
+<h3 id="konstruktor">Konstruktor</h3>
+<pre><code><span class="hljs-function"><span class="hljs-title">Frame</span><span class="hljs-params">(canvas, bgColor)</span></span>
+</code></pre><ul>
+<li>Parametry<ul>
+<li><code>canvas: Canvas</code>
+za pomocą parametru Canvas określany jest obszar, w jakim prezentowana będzie animacja.</li>
+<li><code>bgColor : Color</code> <br>
+Kolor, jaki będzie stanowił tło całej klatki.</li>
+</ul>
+</li>
+</ul>
+<h3 id="metody">Metody</h3>
+<p>  getImg()
+Metoda getImg zwraca klatkę jako PiL.Image - klasę z biblioteki pomocniczej PiL.</p>
+<p>### 
+  add(obj, path, t)
+Metoda add dodaje do klatki obiekt, wraz z obiektem można dodać ścieżkę <code>Path</code> jaka będzie dotyczyła danego obiektu. Ponieważ klatka jest określona w konkretnym czasie, to potrzebne jest również przekazanie parametru <code>t</code></p>
+<ul>
+<li>Parametry<ul>
+<li><code>obj</code> <br>
+Za pomocą parametru obj przekazuje się obiekt, który zostanie dodany do klatki</li>
+<li><code>path</code> <br>
+Za pomocą parametru path przekazywana jest ścieżka <code>Path</code>, która zostanie wykorzystana do określenia pzycji obiektu w przekazanym za pomocą <code>t</code> momencie w czasie</li>
+<li><code>t: int</code> <br>
+t określa w jakim czasie mają zostać określone obiekty rysowane w klatce</li>
+</ul>
+</li>
+</ul>
+<h2 id="serializer">Serializer</h2>
+<h3 id="metody">Metody</h3>
+<p>  save(filename: str, animation: animation)
+Metoda save przetwarza przekazaną animację w gotowy do wyświetlenia plik</p>
+<ul>
+<li>Parametry<ul>
+<li><code>filename: str</code> <br>
+określa nazwę pliku wynikowego animacji.</li>
+<li><code>animation: Animation</code> <br>
+Za pomocą animation przekazywany jest obiekt animacji, który zostanie zanimowany</li>
+</ul>
+</li>
+</ul>
+<h1 id="obiekty-matematyczne">Obiekty matematyczne</h1>
+<h2 id="point">Point</h2>
+<p>Point, to obiekt, który określa pozycję</p>
+<h3 id="konstruktor">Konstruktor</h3>
+<pre><code><span class="hljs-function"><span class="hljs-title">Point</span><span class="hljs-params">(x, y)</span></span>
+</code></pre><ul>
+<li>Parametry<ul>
+<li><code>x</code> <br>
+Pozycja horyzontalna (na osi x), przekazany typ jest dowolny, może być to float, lub int</li>
+<li><code>y</code> <br>
+Pozycja wertykalna (na osi y)</li>
+</ul>
+</li>
+</ul>
