@@ -1,4 +1,6 @@
 from .Frame import Frame
+from .Line import Line
+from .Point import Point
 
 
 class Animation:
@@ -21,9 +23,20 @@ class Animation:
         frames = []
 
         for t in range(self.frameCount):
+            print(f"frame: {t}")
             frame = Frame(self.canvas, self.bgColor)
             for obj in self.objects:
-                frame.add(obj, self.objects[obj], t)
+
+                if isinstance(obj, Line):
+
+                    if self.objects[obj] is None:
+                        path_displacement = Point(0, 0)
+                    else:
+                        path_displacement = self.objects[obj](t)
+
+                    frame.draw(obj.rasterized(), path_displacement)
+                else:
+                    frame.add(obj, self.objects[obj], t)
 
             frames.append(frame)
 
