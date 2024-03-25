@@ -1,4 +1,3 @@
-#TODO: Canvas doesn't really fit into shapes package
 
 class Canvas():
     def __init__(self, width: int, height: int) -> None:

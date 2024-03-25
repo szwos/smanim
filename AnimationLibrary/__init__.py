@@ -2,9 +2,9 @@ from .Color import Color
 from .Frame import Frame
 from .Animation import Animation
 from .Canvas import Canvas
-from .Rect import Rect
+from AnimationLibrary.drawable.Rect import Rect
 from .Point import Point
 from .Serializer import Serializer
 from .Path import Path
-from .Circle import Circle
-from .Line import Line
+from AnimationLibrary.drawable.Circle import Circle
+from AnimationLibrary.drawable.Line import Line
