@@ -3,3 +3,5 @@ https://www.ncl.ac.uk/webtemplate/ask-assets/external/maths-resources/core-mathe
 https://www.pygame.org/docs/
 https://matplotlib.org/stable/index.html
 https://docs.manim.community/en/stable/index.html
+http://members.chello.at/easyfilter/bresenham.pdf (nie wykorzystane, ale wygląda na porządne źródło  na przyszłość)
+Python Scripting for Computational Science Hans Petter Langtangen (książka)

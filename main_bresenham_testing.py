@@ -15,46 +15,46 @@ objects = []
 
 
 # # 1st octant
-pointA = Point(0, 0)
-pointB = Point(100, 50)
-line = Line(pointA, pointB, Point(150, 150))
-objects.append(line)
-
-# 2nd octant
-pointA = Point(0, 0)
-pointB = Point(50, 100)
-line = Line(pointA, pointB, Point(150, 150))
-objects.append(line)
-
-# 3rd octant
-pointA = Point(0, 0)
-pointB = Point(-50, 100)
-line = Line(pointA, pointB, position=Point(150, 150))
-objects.append(line)
-
-# 4th octant
-pointA = Point(0, 0)
-pointB = Point(-100, 50)
-line = Line(pointA, pointB, Point(150, 150))
-objects.append(line)
-
-# 5th octant
-pointA = Point(0, 0)
-pointB = Point(-100, -50)
-line = Line(pointA, pointB, Point(150, 150))
-objects.append(line)
-
-# 6th octant
-pointA = Point(0, 0)
-pointB = Point(-50, -100)
-line = Line(pointA, pointB, Point(150, 150))
-objects.append(line)
-
-# 7th octant
-pointA = Point(0, 0)
-pointB = Point(50, -100)
-line = Line(pointA, pointB, Point(150, 150))
-objects.append(line)
+# pointA = Point(0, 0)
+# pointB = Point(100, 50)
+# line = Line(pointA, pointB, Point(150, 150))
+# objects.append(line)
+#
+# # 2nd octant
+# pointA = Point(0, 0)
+# pointB = Point(50, 100)
+# line = Line(pointA, pointB, Point(150, 150))
+# objects.append(line)
+#
+# # 3rd octant
+# pointA = Point(0, 0)
+# pointB = Point(-50, 100)
+# line = Line(pointA, pointB, position=Point(150, 150))
+# objects.append(line)
+#
+# # 4th octant
+# pointA = Point(0, 0)
+# pointB = Point(-100, 50)
+# line = Line(pointA, pointB, Point(150, 150))
+# objects.append(line)
+#
+# # 5th octant
+# pointA = Point(0, 0)
+# pointB = Point(-100, -50)
+# line = Line(pointA, pointB, Point(150, 150))
+# objects.append(line)
+#
+# # 6th octant
+# pointA = Point(0, 0)
+# pointB = Point(-50, -100)
+# line = Line(pointA, pointB, Point(150, 150))
+# objects.append(line)
+#
+# # 7th octant
+# pointA = Point(0, 0)
+# pointB = Point(50, -100)
+# line = Line(pointA, pointB, Point(150, 150))
+# objects.append(line)
 
 # 8th octant
 pointA = Point(0, 0)
