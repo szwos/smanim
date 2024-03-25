@@ -68,4 +68,3 @@ for o in objects:
     animation.add(copy.copy(o))
 
 Serializer.save("test_bresenham.gif", animation)
-

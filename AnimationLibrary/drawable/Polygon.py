@@ -1,10 +1,8 @@
-import math
-
-from .Pixel import Pixel
-from .Point import Point
-from .Color import Color
-from .Rect import Rect
-from .Line import Line
+from AnimationLibrary.Pixel import Pixel
+from AnimationLibrary.Point import Point
+from AnimationLibrary.Color import Color
+from AnimationLibrary.drawable.Rect import Rect
+from AnimationLibrary.drawable.Line import Line
 
 class Polygon():
 
@@ -55,10 +53,12 @@ class Polygon():
         for i in range(self.rect.B.x):
             for j in range(self.rect.B.y):
 
-                if True:
+                if True:    #  TODO: this is unfinished...
                     self.pixels[i][j] = Pixel(i, j, color)
                 else:
                     self.pixels[i][j] = 0
+
+        return self.pixels
 
 
 
