@@ -1,6 +1,9 @@
 from .Frame import Frame
 from .Point import Point
 
+# Idea: to allow user control of time. Animation class could have tick(n) method, which would render (or like queue to render idk - it should not affect algorithm's time) given amount of ticks
+# this would be easy to use in a scenario, where user runs algorithm and wants every step of algorithm (state of Animation) to last given amount of frames
+
 class Animation:
 
     def __init__(self, frameCount, canvas, bgColor):
@@ -15,6 +18,7 @@ class Animation:
             self.objects[obj] = path
         else:
             raise ValueError("object" + str(obj) + "is already present in animation" + str(self))
+
 
     def getFrames(self):
 

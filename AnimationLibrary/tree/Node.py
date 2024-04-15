@@ -10,7 +10,7 @@ class Node(object):
     def __init__(self, expanded= True):
         #self.tag removed
         #self._identifier -> self._uuid
-        self._uuid = uuid.UUID()
+        self._uuid = uuid.uuid1()
         self.expanded = expanded
         #self._bpointer -> self._back_pointer
         self._back_pointer = None
