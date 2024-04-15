@@ -59,7 +59,7 @@ class Tree():
         UPDATE: the @cmp @key @reverse is present to sort node at each level.
         UPDATE: it
         """
-        node_id = self.root if (node_id is None) else uuid.UUID()
+        node_id = self.root if (node_id is None) else uuid.uuid1()
         filter = (lambda x: True) if (filter is None) else filter
 
         if filter(self[node_id]):
@@ -249,4 +249,4 @@ class Tree():
         if owner_id is None:
             return
         else:
-            self[owner_id].update_front_pointer(target_id, mode)
+            self[owner_id.uuid].update_front_pointer(target_id, mode)
