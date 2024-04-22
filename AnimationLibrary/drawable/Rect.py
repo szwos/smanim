@@ -4,8 +4,11 @@
 from AnimationLibrary.Pixel import Pixel
 from AnimationLibrary.Point import Point
 from AnimationLibrary.Color import Color
+from AnimationLibrary.Animation import Animation
+from typing import Callable
+from AnimationLibrary.drawable import DrawableObject
 
-class Rect():
+class Rect(DrawableObject):
     """
     @args:
     A - top left corner of the rectangle
@@ -13,7 +16,10 @@ class Rect():
     """
     #TODO: in current implementation A Point is useless, because rectangle is always describing it's internal coordinates, hence we can cope with width height described in B Point
     #TODO: default position
-    def __init__(self, A: Point, B: Point, color: Color = Color(0, 0, 0, 255), position: Point = Point(0, 0)) -> None:
+    def __init__(self, A: Point, B: Point, animation: Animation, position: Point = Point(0, 0),
+                 color: Color = Color(0, 0, 0, 255), path: Callable[[float], float] = None, parent: DrawableObject = None):
+        super().__init__(animation, position, color, path, parent)
+
         self.A = A
         self.B = B
 

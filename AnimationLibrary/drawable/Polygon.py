@@ -3,10 +3,15 @@ from AnimationLibrary.Point import Point
 from AnimationLibrary.Color import Color
 from AnimationLibrary.drawable.Rect import Rect
 from AnimationLibrary.drawable.Line import Line
-
+from AnimationLibrary.Animation import Animation
+from typing import Callable
+from AnimationLibrary.drawable.DrawableObject import DrawableObject
 class Polygon():
 
-    def __init__(self, vertices: list[Point], position: Point = Point(0, 0), color: Color = Color(0, 0, 0, 255)) -> None:
+    def __init__(self, vertices: list[Point], animation: Animation, position: Point = Point(0, 0),
+                 color: Color = Color(0, 0, 0, 255), path: Callable[[float], float] = None, parent: DrawableObject = None):
+
+        super().__init__(animation, position, color, path, parent)
 
         self.vertices = vertices
         # position is ALWAYS top left of rect describing the shape
@@ -63,24 +68,24 @@ class Polygon():
 
 
 
-    def __iter__(self):
-        self.i = 0
-        self.j = 0
-        return self
-
-    def __next__(self):
-        if self.j >= self.rect.B.y:
-            raise StopIteration
-
-        pixel = self.pixels[self.i][self.j]
-        self.i += 1
-        if self.i >= self.rect.B.x:
-            self.i = 0
-            self.j += 1
-
-        if pixel == 0:
-            return self.__next__()
-        else:
-            return pixel
-
+    # def __iter__(self):
+    #     self.i = 0
+    #     self.j = 0
+    #     return self
+    #
+    # def __next__(self):
+    #     if self.j >= self.rect.B.y:
+    #         raise StopIteration
+    #
+    #     pixel = self.pixels[self.i][self.j]
+    #     self.i += 1
+    #     if self.i >= self.rect.B.x:
+    #         self.i = 0
+    #         self.j += 1
+    #
+    #     if pixel == 0:
+    #         return self.__next__()
+    #     else:
+    #         return pixel
+    #
 

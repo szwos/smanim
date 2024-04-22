@@ -3,6 +3,9 @@ import math
 from AnimationLibrary.Pixel import Pixel
 from AnimationLibrary.Point import Point
 from AnimationLibrary.Color import Color
+from AnimationLibrary.drawable.DrawableObject import DrawableObject
+from AnimationLibrary.Animation import Animation
+from typing import Callable
 
 #TODO: consider moving file scope methods from this file to some other context
 
@@ -158,7 +161,7 @@ def transform_from_1st_to_octant(points, octant: int):
         case 8:
             return points_negate_y(points)
 
-class Line:
+class Line(DrawableObject):
     """
         @args
         A - starting point of the line
@@ -166,17 +169,17 @@ class Line:
         position - offset of shape's rect top left point from Point(0, 0), default is Point(0, 0)
     """
 
-    def __init__(self, A: Point, B: Point, position: Point = Point(0, 0), color: Color = Color(0, 0, 0, 255)):
+    def __init__(self, A: Point, B: Point, animation: Animation, position: Point = Point(0, 0),
+                 color: Color = Color(0, 0, 0, 255), path: Callable[[float], float] = None, parent: 'DrawableObject' = None):
 
         # TODO: self.A, self.B assignments were removed here, as they would be missleading because they are different from self.rect.A, self.rect.B, do this for other classes too
         # TODO: now i am bringing them back and removing self.rect
+        super().__init__(animation, position, color, path, parent)
         self.A = A
         self.B = B
 
         self.color = color
         self.position = position
-
-        pass
 
     def rasterize(self):
 

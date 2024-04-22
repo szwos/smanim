@@ -1,9 +1,26 @@
-#TODO: maybe make a fork of pyTree library and put this code as ported to python 3
+from AnimationLibrary.tree.Tree import Tree
+from AnimationLibrary.drawable.DrawableObject import DrawableObject
 
-#TODO: check if this Tree even works XD
+# TODO: tree walking algorithm
+class DrawableTree:
+    def __init__(self):
+        self._tree = Tree()
 
-#TODO:
-# create DrawableTree class, that will use Tree class, but will have smanim specific operations available (encapsulation basically)
-# try to make DrawableObject class, that will implement Node class, so that it can be stored on the tree, but this object will also only have library specific operations
-# this object will be a general object, that all objects that can be drawn (rasterized / appear on screen) will inherit after
+    def add(self, obj: DrawableObject, parent = None):
+        self._tree.add_node(obj, parent)
 
+    def positions_to_root(self, obj: DrawableObject):
+        if obj is None:
+            return 0
+
+        return obj.position + self.positions_to_root(obj.parent)
+
+    def ancestors_to_root(self, obj: DrawableObject):
+        if obj is None:
+            return []
+
+        return [obj] + self.ancestors_to_root(obj.parent)
+
+    def children(self, obj: DrawableObject):
+        for child_id in obj.front_pointer:
+            yield self._tree.get_node(child_id)

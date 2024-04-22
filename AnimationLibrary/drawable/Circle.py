@@ -4,8 +4,11 @@ from AnimationLibrary.Pixel import Pixel
 from AnimationLibrary.Point import Point
 from AnimationLibrary.Color import Color
 from AnimationLibrary.drawable.Rect import Rect
+from typing import Callable
+from AnimationLibrary.drawable.DrawableObject import DrawableObject
+from AnimationLibrary.Animation import Animation
 
-class Circle():
+class Circle(DrawableObject):
     """
     @args:natur
     center - a Point in the center of the circle
@@ -13,8 +16,11 @@ class Circle():
     position - offset of shape's rect top left point from Point(0, 0), default is Point(0, 0)
     """
     
-    def __init__(self, r: float, color: Color = Color(25, 25, 225), position: Point = Point(0, 0)) -> None:
+    def __init__(self, r: float, animation: Animation, color: Color = Color(25, 25, 225),
+                 path: Callable[[float], float] = None, position: Point = Point(0, 0), parent: DrawableObject = None):
 
+
+        super().__init__(animation, position, color, path, parent)
         self.radius = r
 
         #position is ALWAYS top left of rect describing the shape
