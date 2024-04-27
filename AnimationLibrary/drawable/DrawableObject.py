@@ -1,5 +1,5 @@
 from AnimationLibrary.tree.Node import Node
-from AnimationLibrary.Animation import Animation
+from AnimationLibrary import Animation
 from AnimationLibrary.Point import Point
 from AnimationLibrary.Color import Color
 from typing import Callable

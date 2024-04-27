@@ -27,7 +27,8 @@ class Animation:
         for t in range(self.frameCount):
             print(f"frame: {t}")
             frame = Frame(self.canvas, self.bgColor)
-            for obj in self.objects_tree._tree:
+            for obj_uuid in self.objects_tree._tree.nodes:
+                obj = self.objects_tree._tree[obj_uuid]
 
                 if obj.path is None:
                     path_displacement = Point(0, 0)

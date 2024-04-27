@@ -6,7 +6,7 @@ from AnimationLibrary.drawable.Line import Line
 from AnimationLibrary.Animation import Animation
 from typing import Callable
 from AnimationLibrary.drawable.DrawableObject import DrawableObject
-class Polygon():
+class Polygon(DrawableObject):
 
     def __init__(self, vertices: list[Point], animation: Animation, position: Point = Point(0, 0),
                  color: Color = Color(0, 0, 0, 255), path: Callable[[float], float] = None, parent: DrawableObject = None):
@@ -17,6 +17,9 @@ class Polygon():
         # position is ALWAYS top left of rect describing the shape
         self.position = position
         self.color = color
+
+        #animation ref is kept for use in Line constructor
+        self.animation = animation
 
 
         r_A_x = min([p.x for p in vertices])
@@ -30,62 +33,20 @@ class Polygon():
         r_A_y = r_A_y - r_A_y
 
 
-        self.rect = Rect(Point(r_A_x, r_A_y), Point(r_B_x, r_B_y))
-
-        self.pixels = [[0] * self.rect.B.x for i in range(self.rect.B.y)]
-        self.pixels = \
-            [[Pixel(i, j, Color(0, 0, 0, 0)) for j in range(self.rect.B.x)] for i in range(self.rect.B.y)]
-
-        # TODO: explore better ways to do this: e.g. Midpoint Circle Algorithm
-        for i in range(self.rect.B.x):
-            for j in range(self.rect.B.y):
-
-                if True:
-                    self.pixels[i][j] = Pixel(i, j, color)
-                else:
-                    self.pixels[i][j] = 0
+        self.dimensions = Rect(Point(r_A_x, r_A_y), Point(r_B_x, r_B_y))
 
     def rasterize(self):
 
-        #TODO : if len(self.vertices == 1: raise exception or smth, idk handle this case it should not be
+        #TODO : if len(self.vertices == 1: raise exception or smth
 
         sides = []
+        pixels = []
         for i in range(len(self.vertices) - 1):
-            sides.append(Line(self.vertices[i], self.vertices[i + 1]))
+            sides.append(Line(self.vertices[i], self.vertices[i + 1], animation=self.animation, parent=self))
 
-        sides.append(Line(self.vertices[len(self.vertices) - 1], self.vertices[0]))
+        for side in sides:
+            for pixel in side.rasterize():
+                pixels.append(pixel + side.position)
 
-        for i in range(self.rect.B.x):
-            for j in range(self.rect.B.y):
-
-                if True:    #  TODO: this is unfinished...
-                    self.pixels[i][j] = Pixel(i, j, color)
-                else:
-                    self.pixels[i][j] = 0
-
-        return self.pixels
-
-
-
-
-    # def __iter__(self):
-    #     self.i = 0
-    #     self.j = 0
-    #     return self
-    #
-    # def __next__(self):
-    #     if self.j >= self.rect.B.y:
-    #         raise StopIteration
-    #
-    #     pixel = self.pixels[self.i][self.j]
-    #     self.i += 1
-    #     if self.i >= self.rect.B.x:
-    #         self.i = 0
-    #         self.j += 1
-    #
-    #     if pixel == 0:
-    #         return self.__next__()
-    #     else:
-    #         return pixel
-    #
+        return pixels
 
