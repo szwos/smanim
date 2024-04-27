@@ -1,0 +1,9 @@
+Czym są DrawableObject
+
+Są rysowane (będą miały jakąś metode renderingu - renderer bedzie sobie po prostu traversował to tree i wywoływał pon nim odp metode)
+Mogą być umieszczane w obiektach strukturalnych (Grid)
+Mają miejsce na ekranie
+Mają hierarchię (Mają parenta)
+Można im ustawiać parenta (jakies setparent, nie są immutuable w ramach drzewa)
+
+Canvas, Grid, Point(może ale predzej w formie jakiegos drawable point czy cos), wszystkie ksztalty, linia

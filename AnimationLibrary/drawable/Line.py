@@ -3,6 +3,9 @@ import math
 from AnimationLibrary.Pixel import Pixel
 from AnimationLibrary.Point import Point
 from AnimationLibrary.Color import Color
+from AnimationLibrary.drawable.DrawableObject import DrawableObject
+from AnimationLibrary.Animation import Animation
+from typing import Callable
 
 #TODO: consider moving file scope methods from this file to some other context
 
@@ -158,7 +161,7 @@ def transform_from_1st_to_octant(points, octant: int):
         case 8:
             return points_negate_y(points)
 
-class Line:
+class Line(DrawableObject):
     """
         @args
         A - starting point of the line
@@ -166,61 +169,32 @@ class Line:
         position - offset of shape's rect top left point from Point(0, 0), default is Point(0, 0)
     """
 
-    def __init__(self, A: Point, B: Point, position: Point = Point(0, 0), color: Color = Color(0, 0, 0, 255)):
+    def __init__(self, A: Point, B: Point, animation: Animation, position: Point = Point(0, 0),
+                 color: Color = Color(0, 0, 0, 255), path: Callable[[float], float] = None, parent: 'DrawableObject' = None):
 
-        # TODO: self.A, self.B assignments were removed here, as they would be missleading because they are different from self.rect.A, self.rect.B, do this for other classes too
-        # TODO: now i am bringing them back and removing self.rect
+        super().__init__(animation, position, color, path, parent)
         self.A = A
         self.B = B
 
         self.color = color
         self.position = position
 
-        pass
-
     def rasterize(self):
 
         # część 1 - przerobienie linii do takiej żeby działało (do 1 oktetu, z punktem poczatkowym w lewym górnym)
-
         A, B = transform_to_1st_octant(self.A, self.B)
 
         # cześć 2 - puszczenie algorytmu, on wypluwa array pixeli
-
         points = bresenham(A, B)
 
         #część 3 - przetransformowanie tego arraya pixeli, tą samą tranformacją, co wczesniej została przetransformowana linia
-
         octant = determine_octant(self.A, self.B)
-
         points = transform_from_1st_to_octant(points, octant)
 
         # część 4 - nadanie otrzymanym punktom koloru (zamienienie je w Pixele) oraz uwzglednienie pozycji
-
         pixels = []
         for point in points:
             pixels.append(Pixel(self.position.x + point.x, self.position.y + point.y, self.color))
 
 
         return pixels
-
-    #TODO: __next__ and __iter__ will be reused
-
-    # def __iter__(self):
-    #     self.i = 0
-    #     self.j = 0
-    #     return self
-    #
-    # def __next__(self):
-    #     if self.j >= self.rect.B.y:
-    #         raise StopIteration
-    #
-    #     pixel = self.pixels[self.j][self.i]
-    #     self.i += 1
-    #     if self.i >= self.rect.B.x:
-    #         self.i = 0
-    #         self.j += 1
-    #
-    #     if pixel == 0:
-    #         return self.__next__()
-    #     else:
-    #         return pixel
