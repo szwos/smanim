@@ -16,9 +16,9 @@ class Circle(DrawableObject):
     """
 
     def __init__(self, r: float, animation: Animation, color: Color = Color(25, 25, 225),
-                path: Callable[[int], Point] = None, position: Point = Point(0, 0), parent: DrawableObject = None):
+                path: Callable[[int], Point] = None, position: Point = Point(0, 0), parent: DrawableObject = None, name: str = ""):
 
-
+        self.name = name
 
         super().__init__(animation, position, color, path, parent)
         self.radius = r
