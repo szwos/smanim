@@ -4,6 +4,7 @@ code ported to python 3, docs copied as is
 """
 
 import uuid
+from collections import deque
 
 from AnimationLibrary.tree.Node import Node
 
@@ -229,6 +230,44 @@ class Tree():
         for node_n in self.expand_tree(node_id):
             st.nodes.update({self[node_n].uuid: self[node_n]})
         return st
+
+    #TODO: better name
+    #TODO: typehint root to UUID object
+    def traverse(self, root = None):
+
+        if root == None:
+            root = self.root
+
+        stack = deque([])
+        preorder = []
+        preorder.append(self.root)
+        stack.append(root)
+
+        while len(stack) > 0:
+
+            were_all_child_nodes_visited = 0
+
+            if len(stack[len(stack) - 1].front_pointer) == 0:
+                x = stack.pop()
+            else:
+                parent = stack[len(stack) - 1]
+
+            for i in range(0, len(parent.front_pointer)):
+                if parent.front_pointer[i] not in preorder:
+                    were_all_child_nodes_visited = 1
+
+                    children = []
+
+                    for child_uuid in parent.front_pointer:
+                        stack.append(self[child_uuid])
+
+                    preorder.append(stack[i])
+                    break
+
+            if were_all_child_nodes_visited == 0:
+                stack.pop()
+
+        return preorder
 
     def __contains__(self, uuid):
         return [node.uuid for node in self.nodes if node.uuid is uuid]

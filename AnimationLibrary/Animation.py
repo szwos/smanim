@@ -35,7 +35,7 @@ class Animation:
                 else:
                     path_displacement = obj.path(t)
 
-                frame.draw(obj.rasterize(), path_displacement)
+                frame.draw(obj.rasterize(), path_displacement + obj.position)
 
             frames.append(frame)
 

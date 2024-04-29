@@ -46,4 +46,4 @@ class Node(object):
         elif mode is self.DELETE:
             self._front_pointer.remove(identifier)
         elif mode is self.INSERT:
-            self._front_pointer = [identifier] # weird one, i don't get it
+            self._front_pointer = [identifier]
