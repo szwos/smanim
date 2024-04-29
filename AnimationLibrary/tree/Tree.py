@@ -257,11 +257,12 @@ class Tree():
                     were_all_child_nodes_visited = 1
 
                     children = []
-
                     for child_uuid in parent.front_pointer:
-                        stack.append(self[child_uuid])
+                        children.append(self[child_uuid])
 
-                    preorder.append(stack[i])
+                    stack.append(children[i])
+                    preorder.append(children[i].uuid)
+
                     break
 
             if were_all_child_nodes_visited == 0:
