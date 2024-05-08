@@ -16,12 +16,12 @@ canvas = Canvas(300, 300)
 animation = Animation(5, canvas, bgColor=Color(10, 10, 125, 255))
 
 
-# pos = Point(150, 150)
-# vertices = [Point(0, 0), Point(10, 10), Point(10, 20), Point(0, 30), Point(-10, 20), Point(-10, 10)]
-# polygon = Polygon(vertices, animation, Point(100, 100), color=Color(255, 123, 0, 255), path=f)
+pos = Point(150, 150)
+vertices = [Point(0, 0), Point(10, 10), Point(10, 20), Point(0, 30), Point(-10, 20), Point(-10, 10)]
+polygon = Polygon(vertices, animation, Point(100, 100), color=Color(255, 123, 0, 255), path=f)
 
-vertices2 = [Point(0, 0), Point(100, 100), Point(100, 200), Point(0, 300), Point(-100, 200), Point(-100, 100)]
-polygon2 = Polygon(vertices2, animation=animation, position=Point(10, 10))
+# vertices2 = [Point(0, 0), Point(100, 100), Point(100, 200), Point(0, 300), Point(-100, 200), Point(-100, 100)]
+# polygon2 = Polygon(vertices2, animation=animation, position=Point(10, 10))
 
 # l0 = Line(Point(10, 10), animation=animation, position=vertices[0] + pos)
 # l1 = Line(Point(0, 10), animation=animation, position=vertices[1] + pos)
