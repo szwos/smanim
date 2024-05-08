@@ -10,24 +10,27 @@ from typing import Callable
 #TODO: consider moving file scope methods from this file to some other context
 
 def bresenham(B: Point):
-    x = 0
-    y = 0
-
-    dx = B.x
-    dy = B.y
-
-    P = 2 * dx - dy
-
     points = []
-    while x <= B.x:
-        points.append(Point(x, y))
-        x += 1
 
+    dx = abs(B.x)
+    dy = abs(B.y)
+
+    P = 2 * dy - dx
+
+    x_step = 1 if B.x >= 0 else -1
+    y_step = 1 if B.y >= 0 else -1
+
+    x, y = 0, 0
+    points.append(Point(x, y))
+
+    while x < dx:
+        x += 1
         if P < 0:
-            P = P + dy
+            P += 2 * dy
         else:
-            P = P + 2 * dy - 2 * dx
             y += 1
+            P += 2 * dy - 2 * dx
+        points.append(Point(x * x_step, y * y_step))
 
     return points
 
