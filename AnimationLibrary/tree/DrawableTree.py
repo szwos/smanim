@@ -1,13 +1,19 @@
 from AnimationLibrary.tree.Tree import Tree
 from AnimationLibrary.drawable.DrawableObject import DrawableObject
+from AnimationLibrary.Canvas import Canvas
 
 # TODO: tree walking algorithm
 class DrawableTree:
-    def __init__(self):
+    def __init__(self, canvas: Canvas):
         self._tree = Tree()
+        self._tree.add_node(canvas)
 
     def add(self, obj: DrawableObject, parent = None):
-        self._tree.add_node(obj, parent)
+
+        if parent is None:
+            self._tree.add_node(obj, self._tree.root)
+        else:
+            self._tree.add_node(obj, parent)
 
     def positions_to_root(self, obj: DrawableObject):
         if obj is None:

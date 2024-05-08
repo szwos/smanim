@@ -9,7 +9,7 @@ from AnimationLibrary.drawable.DrawableObject import DrawableObject
 class Polygon(DrawableObject):
 
     def __init__(self, vertices: list[Point], animation: Animation, position: Point = Point(0, 0),
-                 color: Color = Color(0, 0, 0, 255), path: Callable[[float], float] = None, parent: DrawableObject = None):
+                 color: Color = Color(0, 0, 0, 255), path: Callable[[int], Point] = None, parent: DrawableObject = None):
 
         super().__init__(animation, position, color, path, parent)
 
@@ -21,32 +21,26 @@ class Polygon(DrawableObject):
         #animation ref is kept for use in Line constructor
         self.animation = animation
 
+        self.sides = []
 
-        r_A_x = min([p.x for p in vertices])
-        r_A_y = min([p.y for p in vertices])
-        r_B_x = max([p.x for p in vertices])
-        r_B_y = max([p.y for p in vertices])
+        for i in range(len(self.vertices) - 1):
+            line = Line(vertices[i+1] - vertices[i], animation=animation, parent=self, position=self.vertices[i] + self.position, path=self.path)
+            self.sides.append(line)
 
-        r_B_x = r_B_x - r_A_x
-        r_B_y = r_B_y - r_A_y
-        r_A_x = r_A_x - r_A_x
-        r_A_y = r_A_y - r_A_y
-
-
-        self.dimensions = Rect(Point(r_A_x, r_A_y), Point(r_B_x, r_B_y))
+        pass
 
     def rasterize(self):
+        # do nothing (sides rasterize themselves, bcs they are placed on tree)
+        return []
 
-        #TODO : if len(self.vertices == 1: raise exception or smth
-
-        sides = []
-        pixels = []
-        for i in range(len(self.vertices) - 1):
-            sides.append(Line(self.vertices[i], self.vertices[i + 1], animation=self.animation, parent=self))
-
-        for side in sides:
-            for pixel in side.rasterize():
-                pixels.append(pixel + side.position)
-
-        return pixels
+        # #TODO : if len(self.vertices == 1: raise exception or smth
+        # pixels = []
+        #
+        # for n, side in enumerate(self.sides):
+        #     for pixel in side.rasterize():
+        #         #print(f"side: {n}, pixel: {pixel}, position: {side.position}")
+        #         pixels.append(pixel + self.position)
+        #
+        #
+        # return pixels
 

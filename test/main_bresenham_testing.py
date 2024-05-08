@@ -5,8 +5,8 @@ import copy
 
 canvas = Canvas(300, 300)
 
-objects = []
-
+# tworzenie obiektu animacji
+animation = Animation(10, canvas, Color(25, 25, 100))
 
 # pointA = Point(0, 0)
 # pointB = Point(10, 100)
@@ -15,56 +15,36 @@ objects = []
 
 
 # # 1st octant
-# pointA = Point(0, 0)
-# pointB = Point(100, 50)
-# line = Line(pointA, pointB, Point(150, 150))
-# objects.append(line)
+# pointB1 = Point(100, 50)
+# line1 = Line(pointB1, position=Point(150, 150), animation=animation)
 #
 # # 2nd octant
-# pointA = Point(0, 0)
-# pointB = Point(50, 100)
-# line = Line(pointA, pointB, Point(150, 150))
-# objects.append(line)
+# pointB2 = Point(50, 100)
+# line2 = Line(pointB2, position=Point(150, 150), animation=animation)
 #
 # # 3rd octant
-# pointA = Point(0, 0)
-# pointB = Point(-50, 100)
-# line = Line(pointA, pointB, position=Point(150, 150))
-# objects.append(line)
+# pointB3 = Point(-50, 100)
+# line3 = Line(pointB3, position=Point(150, 150), animation=animation)
 #
 # # 4th octant
-# pointA = Point(0, 0)
-# pointB = Point(-100, 50)
-# line = Line(pointA, pointB, Point(150, 150))
-# objects.append(line)
+# pointB4 = Point(-100, 50)
+# line4 = Line(pointB4, position=Point(150, 150), animation=animation)
 #
 # # 5th octant
-# pointA = Point(0, 0)
-# pointB = Point(-100, -50)
-# line = Line(pointA, pointB, Point(150, 150))
-# objects.append(line)
-#
-# # 6th octant
-# pointA = Point(0, 0)
-# pointB = Point(-50, -100)
-# line = Line(pointA, pointB, Point(150, 150))
-# objects.append(line)
-#
+# pointB5 = Point(-100, -50)
+# line5 = Line(pointB5, position=Point(150, 150), animation=animation)
+
+# 6th octant
+pointB6 = Point(-50, -100)
+line6 = Line(pointB6, position=Point(150, 150), animation=animation)
+
 # # 7th octant
-# pointA = Point(0, 0)
-# pointB = Point(50, -100)
-# line = Line(pointA, pointB, Point(150, 150))
-# objects.append(line)
+# pointB7 = Point(50, -100)
+# line7 = Line(pointB7, position=Point(150, 150), animation=animation)
+#
+# # 8th octant
+# pointB8 = Point(100, -50)
+# line8 = Line(pointB8, position=Point(150, 150), animation=animation)
 
-# 8th octant
-pointA = Point(0, 0)
-pointB = Point(100, -50)
-line = Line(pointA, pointB, Point(150, 150))
-objects.append(line)
+Serializer.save("test/test_bresenham.gif", animation)
 
-# tworzenie obiektu animacji
-animation = Animation(10, canvas, Color(25, 25, 100))
-for o in objects:
-    animation.add(copy.copy(o))
-
-Serializer.save("test_bresenham.gif", animation)
