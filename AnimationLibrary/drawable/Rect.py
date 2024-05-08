@@ -16,11 +16,11 @@ class Rect(DrawableObject):
     """
     #TODO: in current implementation A Point is useless, because rectangle is always describing it's internal coordinates, hence we can cope with width height described in B Point
     #TODO: default position
-    def __init__(self, A: Point, B: Point, animation: Animation = None, position: Point = Point(0, 0),
+    #TODO: get rid of A point
+    def __init__(self, B: Point, animation: Animation = None, position: Point = Point(0, 0),
                  color: Color = Color(0, 0, 0, 255), path: Callable[[float], float] = None, parent: 'DrawableObject' = None):
         super().__init__(animation, position, color, path, parent)
 
-        self.A = A
         self.B = B
 
         self.position = position
@@ -31,8 +31,8 @@ class Rect(DrawableObject):
 
         pixels = []
 
-        for i in range(self.B.y): #TODO: i don't like swapping y with x here, but i was getting index out of range, like it should be swapped idk
-            for j in range(self.B.x):
+        for i in range(self.B.x):
+            for j in range(self.B.y):
                 pixels.append(Pixel(i + self.position.x, j + self.position.y, self.color)) # TODO: take color from somewhere
 
         return pixels

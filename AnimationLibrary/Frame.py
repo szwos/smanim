@@ -20,18 +20,18 @@ class Frame:
 
         return self._img
 
-    def draw(self, obj_pixels, displacement):
+    def draw(self, obj_pixels):
 
         for pixel in obj_pixels:
-            for x in range(self.canvas.width):
-                for y in range(self.canvas.height):
 
-                    if pixel.x == x and pixel.y == y:
-                        if pixel.color.a == 0:
-                            pass # skip, drawn color is invisible
-                        elif pixel.color.a != 255: # not fully opaque
-                            raise NotImplementedError("alpha blending is not implemented yet, any colors with opacity other than 0 or 255 are not supported")
-                        else:
-                            x = pixel.x + displacement.x
-                            y = pixel.y + displacement.y
-                            self.pixels[x][y] = pixel.color
+            if pixel.x < self.canvas.width and pixel.y < self.canvas.height and \
+                pixel.x >= 0 and pixel.y >= 0:
+
+                if pixel.color.a == 0:
+                    pass # skip, drawn color is invisible
+                elif pixel.color.a != 255:
+                    raise NotImplementedError(
+                        "alpha blending is not implemented yet, any colors with opacity other than 0 or 255 are not supported")
+                else:
+                    self.pixels[pixel.x][pixel.y] = pixel.color
+

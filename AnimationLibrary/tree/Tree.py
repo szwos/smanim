@@ -17,7 +17,7 @@ class DuplicatedNodeIdError(Exception):
 #name changes from https://github.com/guotsuan/pyTree/ (bo zapomne i sie pogubie xd)
 # nid -> node_id
 
-# TODO: rename to DrawableObjectTree, bcs this tree itself is not Drawable and it sounds like it
+# TODO: test limit of nodes, and throw custom exception instead of whatever is thrown
 class Tree():
 
     (ROOT, DEPTH, WIDTH) = range(3) # TODO: i don't like this, seems elegant but also kind of weird
@@ -38,7 +38,7 @@ class Tree():
             if self.root is not None:
                 raise MultipleRootError
             else:
-                self.root = node.uuid
+                self.root = node
 
         self.nodes.update({node.uuid: node})
         self._update_front_pointer(parent, node.uuid, Node.ADD)
@@ -235,12 +235,14 @@ class Tree():
     #TODO: typehint root to UUID object
     def traverse(self, root = None):
 
+        # TODO: porownaj, co laduje w zmiennej parent w tree_traverse a co ląduje tutaj, cos sie nie zgadza z typami,
+        #  powinien byc chyba object a przypisywane jest UUID, to moze zależeć od tego, co jest wkladane jako root node w tree
+
         if root == None:
             root = self.root
 
         stack = deque([])
         preorder = []
-        preorder.append(self.root)
         stack.append(root)
 
         while len(stack) > 0:

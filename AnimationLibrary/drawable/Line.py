@@ -9,12 +9,12 @@ from typing import Callable
 
 #TODO: consider moving file scope methods from this file to some other context
 
-def bresenham(A: Point, B: Point):
-    x = A.x
-    y = A.y
+def bresenham(B: Point):
+    x = 0
+    y = 0
 
-    dx = B.x - A.x
-    dy = B.y - A.y
+    dx = B.x
+    dy = B.y
 
     P = 2 * dx - dy
 
@@ -34,32 +34,23 @@ def bresenham(A: Point, B: Point):
 def swapXWithY(P: Point):
     return Point(P.y, P.x)
 
-def negate_x(A: Point, B: Point):
-    A_x = -A.x
-    A_y = A.y
-
+def negate_x(B: Point):
     B_x = -B.x
     B_y = B.y
 
-    return Point(A_x, A_y), Point(B_x, B_y)
+    return Point(B_x, B_y)
 
-def negate_y(A: Point, B: Point):
-    A_x = A.x
-    A_y = -A.y
-
+def negate_y(B: Point):
     B_x = B.x
     B_y = -B.y
 
-    return Point(A_x, A_y), Point(B_x, B_y)
+    return Point(B_x, B_y)
 
-def swap_x_with_y(A: Point, B: Point):
-    A_x = A.y
-    A_y = A.x
-
+def swap_x_with_y(B: Point):
     B_x = B.y
     B_y = B.x
 
-    return Point(A_x, A_y), Point(B_x, B_y)
+    return Point(B_x, B_y)
 
 def points_swap_x_with_y(points):
     reversed_points = []
@@ -80,67 +71,64 @@ def points_negate_y(points):
         negated_points.append(Point(p.x, -p.y))
     return negated_points
 
-def determine_octant(A: Point, B: Point) -> int:
+def determine_octant(B: Point) -> int:
 
-    dx = B.x - A.x
-    dy = B.y - A.y
-
-    if dx >= 0:
-        if dy >= 0:
-            if abs(dx) >= abs(dy):
+    if B.x >= 0:
+        if B.y >= 0:
+            if abs(B.x) >= abs(B.y):
                 return 1
             else:
                 return 2
         else:
-            if abs(dx) >= abs(dy):
+            if abs(B.x) >= abs(B.y):
                 return 8
             else:
                 return 7
     else:
-        if dy >= 0:
-            if abs(dx) >= abs(dy):
+        if B.y >= 0:
+            if abs(B.x) >= abs(B.y):
                 return 4
             else:
                 return 3
         else:
-            if abs(dx) >= abs(dy):
+            if abs(B.x) >= abs(B.y):
                 return 5
             else:
                 return 6
 
-def transform_to_1st_octant(A: Point, B: Point):
+def transform_to_1st_octant(B: Point):
 
-    octant = determine_octant(A, B)
+    octant = determine_octant(B)
 
     match octant:
         case 1:
-            return A, B
+            return B
         case 2:
-            new_A, new_B = swap_x_with_y(A, B)
-            return  new_A, new_B
+            new_B = swap_x_with_y(B)
+            return new_B
         case 3:
-            new_A, new_B = negate_x(A, B)
-            new_A, new_B = swap_x_with_y(new_A, new_B)
-            return new_A, new_B
+            new_B = negate_x(B)
+            new_B = swap_x_with_y(new_B)
+            return new_B
         case 4:
-            new_A, new_B = negate_x(A, B)
-            return new_A, new_B
+            new_B = negate_x(B)
+            return new_B
         case 5:
-            new_A, new_B = negate_y(A, B)
-            new_A, new_B = negate_x(new_A, new_B)
-            return new_A, new_B
+            new_B = negate_y(B)
+            new_B = negate_x(new_B)
+            return new_B
         case 6:
-            new_A, new_B = negate_y(A, B)
-            new_A, new_B = negate_x(new_A, new_B)
-            new_A, new_B = swap_x_with_y(new_A, new_B)
-            return new_A, new_B
+            new_B = negate_y(B)
+            new_B = negate_x(new_B)
+            new_B = swap_x_with_y(new_B)
+            return new_B
         case 7:
-            new_A, new_B = negate_y(A, B)
-            new_A, new_B = swap_x_with_y(new_A, new_B)
-            return new_A, new_B
+            new_B = negate_y(B)
+            new_B = swap_x_with_y(new_B)
+            return new_B
         case 8:
-            new_A, new_B = negate_y(A, B)
-            return new_A, new_B
+            new_B = negate_y(B)
+            return new_B
 def transform_from_1st_to_octant(points, octant: int):
 
     match octant:
@@ -149,7 +137,7 @@ def transform_from_1st_to_octant(points, octant: int):
         case 2:
             return points_swap_x_with_y(points)
         case 3:
-            return points_swap_x_with_y(points_negate_x(points))
+            return points_negate_x(points_swap_x_with_y(points))
         case 4:
             return points_negate_x(points)
         case 5:
@@ -157,7 +145,7 @@ def transform_from_1st_to_octant(points, octant: int):
         case 6:
             return points_swap_x_with_y(points_negate_y(points_negate_x(points)))
         case 7:
-            return points_swap_x_with_y(points_negate_y(points))
+            return points_negate_y(points_swap_x_with_y(points))
         case 8:
             return points_negate_y(points)
 
@@ -169,11 +157,11 @@ class Line(DrawableObject):
         position - offset of shape's rect top left point from Point(0, 0), default is Point(0, 0)
     """
 
-    def __init__(self, A: Point, B: Point, animation: Animation, position: Point = Point(0, 0),
+    # TODO: rename B
+    def __init__(self, B: Point, animation: Animation, position: Point = Point(0, 0),
                  color: Color = Color(0, 0, 0, 255), path: Callable[[float], float] = None, parent: 'DrawableObject' = None):
 
         super().__init__(animation, position, color, path, parent)
-        self.A = A
         self.B = B
 
         self.color = color
@@ -182,19 +170,18 @@ class Line(DrawableObject):
     def rasterize(self):
 
         # część 1 - przerobienie linii do takiej żeby działało (do 1 oktetu, z punktem poczatkowym w lewym górnym)
-        A, B = transform_to_1st_octant(self.A, self.B)
+        B = transform_to_1st_octant(self.B)
 
         # cześć 2 - puszczenie algorytmu, on wypluwa array pixeli
-        points = bresenham(A, B)
+        points = bresenham(B)
 
         #część 3 - przetransformowanie tego arraya pixeli, tą samą tranformacją, co wczesniej została przetransformowana linia
-        octant = determine_octant(self.A, self.B)
+        octant = determine_octant(self.B)
         points = transform_from_1st_to_octant(points, octant)
 
         # część 4 - nadanie otrzymanym punktom koloru (zamienienie je w Pixele) oraz uwzglednienie pozycji
         pixels = []
         for point in points:
             pixels.append(Pixel(self.position.x + point.x, self.position.y + point.y, self.color))
-
 
         return pixels
