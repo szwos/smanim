@@ -185,6 +185,7 @@ class Line(DrawableObject):
         # część 4 - nadanie otrzymanym punktom koloru (zamienienie je w Pixele) oraz uwzglednienie pozycji
         pixels = []
         for point in points:
-            pixels.append(Pixel(self.position.x + point.x, self.position.y + point.y, self.color))
+            pixels.append(Pixel(point.x, point.y, self.color))
 
         return pixels
+

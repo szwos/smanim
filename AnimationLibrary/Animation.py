@@ -20,7 +20,6 @@ class Animation:
     def add(self, obj: DrawableObject, parent: DrawableObject = None):
         self.objects_tree.add(obj, parent)
 
-    # TODO: this needs to be rewritten
     def getFrames(self):
 
         frames = []
@@ -32,17 +31,16 @@ class Animation:
 
              # TODO: handle when nothing is added to animation
 
-            for obj_uuid in self.objects_tree._tree.traverse(): # TODO traverse method in DrawableTree
+            for obj_uuid in self.objects_tree._tree.traverse():
                 obj = self.objects_tree._tree[obj_uuid]
 
-                if obj.path is None:
-                    path_displacement = Point(0, 0)
-                else:
-                    path_displacement = obj.path(t)
+                transform = Point(0, 0)
+                for ancestor in self.objects_tree.ancestors_to_root(obj):
+                    transform = transform + ancestor.transform(t)
 
                 displaced_pixels = [] # after applying path displacement
                 for p in obj.rasterize():
-                    displaced_pixels.append(p + path_displacement)
+                    displaced_pixels.append(p + transform)
 
                 frame.draw(displaced_pixels)
 
