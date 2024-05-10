@@ -33,5 +33,5 @@ class Frame:
                     raise NotImplementedError(
                         "alpha blending is not implemented yet, any colors with opacity other than 0 or 255 are not supported")
                 else:
-                    self.pixels[pixel.x][pixel.y] = pixel.color
+                    self.pixels[int(pixel.x)][int(pixel.y)] = pixel.color
 

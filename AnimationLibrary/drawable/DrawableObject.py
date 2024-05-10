@@ -20,3 +20,10 @@ class DrawableObject(Node):
 
         animation.add(self, parent)
 
+    def transform(self, t: int):
+        if self.path is None:
+            return self.position
+        else:
+            return self.position + self.path(t)
+
+

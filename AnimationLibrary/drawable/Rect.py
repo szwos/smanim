@@ -33,24 +33,7 @@ class Rect(DrawableObject):
 
         for i in range(self.B.x):
             for j in range(self.B.y):
-                pixels.append(Pixel(i + self.position.x, j + self.position.y, self.color)) # TODO: take color from somewhere
+                pixels.append(Pixel(i, j, self.color))
 
         return pixels
-
-    # def __iter__(self):
-    #     self.i = 0
-    #     self.j = 0
-    #     return self
-    #
-    # def __next__(self):
-    #     if self.j >= self.B.y:
-    #         raise StopIteration
-    #
-    #     pixel = self.pixels[self.i][self.j]
-    #     self.i += 1
-    #     if self.i >= self.B.x:
-    #         self.i = 0
-    #         self.j += 1
-    #     return pixel
-
 
