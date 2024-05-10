@@ -8,3 +8,7 @@ from .Serializer import Serializer
 from .Path import Path
 from AnimationLibrary.drawable.Circle import Circle
 from AnimationLibrary.drawable.Line import Line
+from AnimationLibrary.equations.CircularMotion import CircularMotion
+from AnimationLibrary.equations.LinearMotion import LinearMotion
+from AnimationLibrary.equations.HarmonicMotion import HarmonicMotion
+from AnimationLibrary.equations.DampedHarmonicMotion import DampedHarmonicMotion
