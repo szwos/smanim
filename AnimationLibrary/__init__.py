@@ -12,3 +12,5 @@ from AnimationLibrary.equations.CircularMotion import CircularMotion
 from AnimationLibrary.equations.LinearMotion import LinearMotion
 from AnimationLibrary.equations.HarmonicMotion import HarmonicMotion
 from AnimationLibrary.equations.DampedHarmonicMotion import DampedHarmonicMotion
+from AnimationLibrary.drawable.Rectangle import Rectangle
+from AnimationLibrary.drawable.Polygon import Polygon

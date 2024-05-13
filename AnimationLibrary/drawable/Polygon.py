@@ -23,11 +23,16 @@ class Polygon(DrawableObject):
 
         self.sides = []
 
+        displacement_x = min([v.x for v in vertices])
+        displacement_y = min([v.y for v in vertices])
+
+        self.displacement = Point(displacement_x, displacement_y)
+
         for i in range(len(self.vertices) - 1):
-            line = Line(vertices[i+1] - vertices[i], animation=animation, parent=self, position=vertices[i] + self.position, path=self.path)
+            line = Line(vertices[i+1] - vertices[i], animation=animation, parent=self, position=vertices[i] - self.displacement, path=self.path)
             self.sides.append(line)
 
-        last_line = Line(vertices[0] - vertices[len(self.vertices) - 1], animation=animation, parent=self, position=vertices[len(self.vertices) - 1] + position)
+        last_line = Line(vertices[0] - vertices[len(self.vertices) - 1], animation=animation, parent=self, position=vertices[len(self.vertices) - 1] - self.displacement)
         self.sides.append(last_line)
 
         pass
