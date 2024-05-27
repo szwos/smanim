@@ -14,3 +14,4 @@ from AnimationLibrary.equations.HarmonicMotion import HarmonicMotion
 from AnimationLibrary.equations.DampedHarmonicMotion import DampedHarmonicMotion
 from AnimationLibrary.drawable.Rectangle import Rectangle
 from AnimationLibrary.drawable.Polygon import Polygon
+from AnimationLibrary.algorithms.FloodFill import FloodFill
