@@ -30,3 +30,12 @@ class DrawableTree:
     def children(self, obj: DrawableObject):
         for child_id in obj.front_pointer:
             yield self._tree.get_node(child_id)
+
+    def traverse(self):
+
+        objects = []
+        for obj_uuid in self._tree.traverse(None):
+            objects.append(self._tree[obj_uuid])
+
+        return objects
+

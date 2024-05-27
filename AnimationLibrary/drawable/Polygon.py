@@ -29,7 +29,7 @@ class Polygon(DrawableObject):
         self.displacement = Point(displacement_x, displacement_y)
 
         for i in range(len(self.vertices) - 1):
-            line = Line(vertices[i+1] - vertices[i], animation=animation, parent=self, position=vertices[i] - self.displacement, path=self.path)
+            line = Line(vertices[i+1] - vertices[i], animation=animation, parent=self, position=vertices[i] - self.displacement)
             self.sides.append(line)
 
         last_line = Line(vertices[0] - vertices[len(self.vertices) - 1], animation=animation, parent=self, position=vertices[len(self.vertices) - 1] - self.displacement)
