@@ -12,7 +12,7 @@ class Rectangle(Polygon):
                  parent: 'DrawableObject' = None):
 
         vertices = [Point(0, 0), Point(B.x, 0), Point(B.x, B.y), Point(0, B.y)]
-        super().__init__(vertices, animation, position, Color(0, 0, 0, 255), path, parent)
+        super().__init__(vertices, animation, position, color, path, parent)
 
         self.width = B.x
         self.height = B.y

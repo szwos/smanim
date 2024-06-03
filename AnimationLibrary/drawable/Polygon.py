@@ -6,6 +6,9 @@ from AnimationLibrary.drawable.Line import Line
 from AnimationLibrary.Animation import Animation
 from typing import Callable
 from AnimationLibrary.drawable.DrawableObject import DrawableObject
+from AnimationLibrary.algorithms.FloodFill import FloodFill
+import math
+
 class Polygon(DrawableObject):
 
     def __init__(self, vertices: list[Point], animation: Animation, position: Point = Point(0, 0),
@@ -29,26 +32,38 @@ class Polygon(DrawableObject):
         self.displacement = Point(displacement_x, displacement_y)
 
         for i in range(len(self.vertices) - 1):
-            line = Line(vertices[i+1] - vertices[i], animation=animation, parent=self, position=vertices[i] - self.displacement)
+            line = Line(vertices[i+1] - vertices[i], animation=None, parent=self, position=vertices[i] - self.displacement)
             self.sides.append(line)
 
-        last_line = Line(vertices[0] - vertices[len(self.vertices) - 1], animation=animation, parent=self, position=vertices[len(self.vertices) - 1] - self.displacement)
+        last_line = Line(vertices[0] - vertices[len(self.vertices) - 1], animation=None, parent=self, position=vertices[len(self.vertices) - 1] - self.displacement)
         self.sides.append(last_line)
 
         pass
 
     def rasterize(self):
-        # do nothing (sides rasterize themselves, bcs they are placed on tree)
-        return []
+        pixels = []
 
-        # #TODO : if len(self.vertices == 1: raise exception or smth
-        # pixels = []
-        #
-        # for n, side in enumerate(self.sides):
-        #     for pixel in side.rasterize():
-        #         #print(f"side: {n}, pixel: {pixel}, position: {side.position}")
-        #         pixels.append(pixel + self.position)
-        #
-        #
-        # return pixels
+        for side in self.sides:
+            for pixel in side.rasterize():
+                pixels.append(pixel + side.position)
 
+        width = int(max([math.fabs(v.x) + math.fabs(self.displacement.x) for v in self.vertices]))
+        height = int(max([math.fabs(v.y) + math.fabs(self.displacement.y) for v in self.vertices]))
+
+        frame = [[None for _ in range(height + 1)] for _ in range(width + 1)]
+
+        for p in pixels:
+            frame[p.x][p.y] = p.color
+
+        fill_seed = Point(int(width / 2), int(height / 2))
+
+        frame = FloodFill.fill(frame, width, height, fill_seed, self.color)
+
+        # TODO: this could propably be optimised to avoid copying pixels
+        colored_pixels = []
+        for x in range(width):
+            for y in range(height):
+                if frame[x][y] is not None:
+                    colored_pixels.append(Pixel(x, y, frame[x][y]))
+
+        return colored_pixels

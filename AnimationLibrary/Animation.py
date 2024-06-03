@@ -46,21 +46,21 @@ class Animation:
 
                 frame.draw(displaced_pixels)
 
-            for obj in self.objects_tree.traverse():
-
-                if hasattr(obj, 'fill_seed'):
-
-                    fill_color = obj.fill_seed.color
-
-                    transform = Point(0, 0)
-                    for ancestor in self.objects_tree.ancestors_to_root(obj):
-                        transform = transform + ancestor.transform(t)
-
-                    fill_x = int(obj.fill_seed.x + transform.x)
-                    fill_y = int(obj.fill_seed.y + transform.y)
-
-                    if fill_x >= 0 and fill_x < self.canvas.width and fill_y >= 0 and fill_y < self.canvas.height:
-                        frame.pixels = FloodFill.fill(frame.pixels, frame.canvas.width, frame.canvas.height, Point(fill_x, fill_y), fill_color)
+            # for obj in self.objects_tree.traverse():
+            #
+            #     if hasattr(obj, 'fill_seed'):
+            #
+            #         fill_color = obj.fill_seed.color
+            #
+            #         transform = Point(0, 0)
+            #         for ancestor in self.objects_tree.ancestors_to_root(obj):
+            #             transform = transform + ancestor.transform(t)
+            #
+            #         fill_x = int(obj.fill_seed.x + transform.x)
+            #         fill_y = int(obj.fill_seed.y + transform.y)
+            #
+            #         if fill_x >= 0 and fill_x < self.canvas.width and fill_y >= 0 and fill_y < self.canvas.height:
+            #             frame.pixels = FloodFill.fill(frame.pixels, frame.canvas.width, frame.canvas.height, Point(fill_x, fill_y), fill_color)
 
             frames.append(frame)
 

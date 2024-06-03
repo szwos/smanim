@@ -161,7 +161,7 @@ class Line(DrawableObject):
     """
 
     # TODO: rename B
-    def __init__(self, B: Point, animation: Animation, position: Point = Point(0, 0),
+    def __init__(self, B: Point, animation: Animation = None, position: Point = Point(0, 0),
                  color: Color = Color(0, 0, 0, 255), path: Callable[[float], float] = None, parent: 'DrawableObject' = None):
 
         super().__init__(animation, position, color, path, parent)
