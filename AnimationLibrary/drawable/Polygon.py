@@ -47,15 +47,16 @@ class Polygon(DrawableObject):
             for pixel in side.rasterize():
                 pixels.append(pixel + side.position)
 
-        width = int(max([math.fabs(v.x) + math.fabs(self.displacement.x) for v in self.vertices]))
-        height = int(max([math.fabs(v.y) + math.fabs(self.displacement.y) for v in self.vertices]))
+        width = int(max([v.x - self.displacement.x for v in self.vertices])) + 1
+        height = int(max([v.y - self.displacement.y for v in self.vertices])) + 1
 
-        frame = [[None for _ in range(height + 1)] for _ in range(width + 1)]
+        frame = [[None for _ in range(height)] for _ in range(width)]
 
         for p in pixels:
             frame[p.x][p.y] = p.color
 
-        fill_seed = Point(int(width / 2), int(height / 2))
+
+        fill_seed = Point(int(width / 2), int(height / 2)) # TODO: SOMETHING BETTER
 
         frame = FloodFill.fill(frame, width, height, fill_seed, self.color)
 

@@ -13,7 +13,7 @@ class Animation:
 # TODO: maybe place canvas as root node?
 # TODO: move bgColor as this "root canvas" property
 # TODO: typehint
-    def __init__(self, frameCount, canvas, bgColor):
+    def __init__(self, frameCount, canvas, bgColor: Color = Color(60, 60, 230)):
         self.objects_tree = DrawableTree(canvas)
         self.frameCount = frameCount
         self.canvas = canvas
