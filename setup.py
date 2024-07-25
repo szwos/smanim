@@ -3,7 +3,10 @@ from setuptools import setup
 setup(
     name='smanim',
     version='1',
-    packages=['AnimationLibrary'],
+    packages=['AnimationLibrary', 'AnimationLibrary.drawable', 'AnimationLibrary.algorithms', 'AnimationLibrary.equations', 'AnimationLibrary.tree'],
+    install_requires=[
+      "pillow",
+    ],
     url='https://github.com/szwos/smanim',
     license='',
     author='Szwos',
