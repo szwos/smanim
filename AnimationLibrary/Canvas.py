@@ -1,7 +1,8 @@
-#TODO: Canvas doesn't really fit into shapes package
+from AnimationLibrary.tree.Node import Node
 
-class Canvas():
+class Canvas(Node):
     def __init__(self, width: int, height: int) -> None:
+        super().__init__()
         self.width = width
         self.height = height
 
