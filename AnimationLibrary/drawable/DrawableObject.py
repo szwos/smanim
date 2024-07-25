@@ -27,4 +27,9 @@ class DrawableObject(Node):
         else:
             return self.position + self.path(t)
 
+    def ancestors_to_root(self):
+        if self.parent is None:
+            return []
+
+        return [self] + self.parent.ancestors_to_root()
 
