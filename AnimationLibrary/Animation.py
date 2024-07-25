@@ -4,6 +4,7 @@ from AnimationLibrary.tree.DrawableTree import DrawableTree
 from AnimationLibrary.drawable.DrawableObject import DrawableObject
 from AnimationLibrary.algorithms.FloodFill import FloodFill
 from AnimationLibrary.Color import Color
+# from AnimationLibrary.drawable.Polygon import Polygon
 
 # Idea: to allow user control of time. Animation class could have tick(n) method, which would render (or like queue to render idk - it should not affect algorithm's time) given amount of ticks
 # this would be easy to use in a scenario, where user runs algorithm and wants every step of algorithm (state of Animation) to last given amount of frames
@@ -36,15 +37,17 @@ class Animation:
 
             for obj in self.objects_tree.traverse():
 
-                transform = Point(0, 0)
-                for ancestor in self.objects_tree.ancestors_to_root(obj):
-                    transform = transform + ancestor.transform(t)
+                frame.draw(obj.rasterize(t))
 
-                displaced_pixels = [] # after applying path displacement
-                for p in obj.rasterize():
-                    displaced_pixels.append(p + transform)
-
-                frame.draw(displaced_pixels)
+                # transform = Point(0, 0)
+                # for ancestor in self.objects_tree.ancestors_to_root(obj):
+                #     transform = transform + ancestor.transform(t)
+                #
+                # displaced_pixels = [] # after applying path displacement
+                # for p in obj.rasterize():
+                #     displaced_pixels.append(p + transform)
+                #
+                # frame.draw(displaced_pixels)
 
             # for obj in self.objects_tree.traverse():
             #
