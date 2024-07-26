@@ -135,8 +135,6 @@ class Polygon(DrawableObject):
 
         # TODO: sprawdz czy pivot dziala dobrze
 
-        Serializer.save_pixels("test/imgs/polaczone", pixels)
-
         #width = int(max([v.x - displacement_x for v in vertices])) + 1
         #height = int(max([v.y - displacement_y for v in vertices])) + 1
         width = max([p.x for p in pixels]) + 1
@@ -148,7 +146,7 @@ class Polygon(DrawableObject):
         for p in pixels:
             frame[p.x][p.y] = p.color
 
-        Serializer.save_frame("test/imgs/przepisane", frame)
+        #Serializer.save_frame("test/imgs/przepisane", frame)
 
         #TODO: this NEEDS to be upgraded # take first pixel, that is inside the shape
         if self.fill_seed is None:
@@ -158,7 +156,7 @@ class Polygon(DrawableObject):
 
         frame = FloodFill.fill(frame, width, height, fill_seed, self.color)
 
-        Serializer.save_frame("test/imgs/colored", frame)
+        #Serializer.save_frame("test/imgs/colored", frame)
 
 
         # transform

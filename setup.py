@@ -1,9 +1,10 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='smanim',
     version='1',
-    packages=['AnimationLibrary', 'AnimationLibrary.drawable', 'AnimationLibrary.algorithms', 'AnimationLibrary.equations'],
+    #packages=['AnimationLibrary', 'AnimationLibrary.drawable', 'AnimationLibrary.algorithms', 'AnimationLibrary.equations'],
+    packages=find_packages(),
     install_requires=[
       "pillow",
     ],
